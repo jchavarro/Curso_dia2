@@ -1,28 +1,36 @@
-package co.edu.utp.isc.gia.gestion_de_usuario_back.Service.impl;
+package co.edu.utp.isc.gia.gestion_de_usuario_back.service.impl;
 
-import co.edu.utp.isc.gia.gestion_de_usuario_back.Entities.UsuarioEntity;
-import co.edu.utp.isc.gia.gestion_de_usuario_back.Repository.UsuarioRepository;
-import co.edu.utp.isc.gia.gestion_de_usuario_back.Service.UsuarioServicio;
+import co.edu.utp.isc.gia.gestion_de_usuario_back.entities.UsuarioEntity;
+import co.edu.utp.isc.gia.gestion_de_usuario_back.repository.UsuarioRepository;
+import co.edu.utp.isc.gia.gestion_de_usuario_back.service.UsuarioServicio;
 import co.edu.utp.isc.gia.gestion_de_usuario_back.dto.UsuarioDTO;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Service
 public class UsuarioServicioImpl implements UsuarioServicio {
 
+    @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
     private ModelMapper modelMapper = new ModelMapper();
+
+    public UsuarioServicioImpl() {
+    }
+
+    public UsuarioServicioImpl(UsuarioRepository usuarioRepository, ModelMapper modelMapper) {
+        this.usuarioRepository = usuarioRepository;
+        this.modelMapper = modelMapper;
+    }
 
     @Override
     public UsuarioDTO guardarUsuario(UsuarioDTO usuarioDTO) {
-        System.out.println(usuarioDTO);
         UsuarioEntity usuarioEntity = modelMapper.map(usuarioDTO, UsuarioEntity.class);
-        System.out.println(usuarioEntity);
         UsuarioEntity usuarioEntityPer = usuarioRepository.save(usuarioEntity);
         System.out.println(usuarioEntityPer);
         UsuarioDTO usuarioDTO1 = modelMapper.map(usuarioEntityPer, UsuarioDTO.class);

@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Data
 @Builder
 public class UsuarioDTO implements Serializable {
+    private Long id;
     private String nombre;
     private String apellido;
     private String telefono;
