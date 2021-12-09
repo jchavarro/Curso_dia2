@@ -72,7 +72,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public UsuarioDTO obtenerUsuario(Long id) {
         if (usuarioRepository.existsById(id)) {
-            return modelMapper.map(usuarioRepository.findById(id), UsuarioDTO.class);
+            UsuarioEntity usuarioEntity = usuarioRepository.findById(id).get();
+            return modelMapper.map(usuarioRepository.findById(id).get(), UsuarioDTO.class);
         } else {
             throw new UserNotFoundException("EL usuario no existe");
         }
