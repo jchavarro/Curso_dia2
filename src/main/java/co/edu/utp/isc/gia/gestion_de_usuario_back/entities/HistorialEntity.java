@@ -6,26 +6,24 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "USUARIO")
-public class UsuarioEntity implements Serializable {
-
+@Table(name = "HISTORIAL")
+public class HistorialEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre;
+    private Date fecha;
 
-    private String apellido;
+    private String descripcion;
 
-    private String telefono;
-
-    private String email;
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "uId", foreignKey = @ForeignKey(name = "uId"))
+    private UsuarioEntity usuarioEntity;
 
 }
